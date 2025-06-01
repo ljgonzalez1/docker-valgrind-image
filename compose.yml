@@ -19,6 +19,7 @@ services:
         BINARY_NAME: "get_cloudflare_zone_id"
         # Ejecutar como root si se setea a "true", de lo contrario ejecuta como 1000:1000
         ROOT_ACCESS: "false"
+
     volumes:
         # Montar la carpeta local de la aplicación en modo solo lectura
         # Sustituye /ruta/local/tu_app por la ruta real
