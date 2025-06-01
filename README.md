@@ -1,7 +1,9 @@
 # docker-valgrind-image
 An image which includes valgrind and executes requested tests
 
+```bash
 docker build -t valgrind_image:latest -f Dockerfile .
+```
 
 ```bash
 docker run \
@@ -15,6 +17,12 @@ docker run \
     -v "${BINARY_FOLDER}":/valgrinduser/app:ro \
     -t \
     valgrind_image:latest
+```
+
+or 
+
+```bash
+docker compose up
 ```
 
 Note: Not affiliated with valgrind
