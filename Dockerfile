@@ -57,6 +57,8 @@ RUN groupadd -g ${GID} ${USERNAME} && \
     mkdir -p /${USERNAME} && \
     chown ${USERNAME}:${USERNAME} /${USERNAME}
 
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+
 WORKDIR /${USERNAME}/app
 
 ENTRYPOINT exec "/usr/local/bin/entrypoint.sh"
