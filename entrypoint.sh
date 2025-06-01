@@ -21,7 +21,7 @@ if [ -n "$REQUIRED_PACKAGES" ]; then
 fi
 
 # Construir el comando Valgrind
-VALGRIND_CMD=(/usr/bin/valgrind)
+VALGRIND_CMD=/usr/bin/valgrind
 
 # Añadir args de Valgrind si existen
 if [ -n "$VALGRIND_ARGS" ]; then

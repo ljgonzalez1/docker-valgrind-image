@@ -59,6 +59,8 @@ RUN groupadd -g ${GID} ${USERNAME} && \
 
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
+RUN chmod a+x /usr/local/bin/entrypoint.sh
+
 WORKDIR /${USERNAME}/app
 
 ENTRYPOINT exec "/usr/local/bin/entrypoint.sh"
