@@ -16,13 +16,13 @@ services:
             # Argumentos de Valgrind (por ejemplo: "--leak-check=full --show-leak-kinds=all")
             VALGRIND_ARGS: "--leak-check=full"
             # Nombre del binario a ejecutar dentro de /valgrinduser/app
-            BINARY_NAME: "get_cloudflare_zone_id"
+            BINARY_NAME: ${BINARY_NAME}
             # Ejecutar como root si se setea a "true", de lo contrario ejecuta como 1000:1000
             ROOT_ACCESS: "false"
 
         volumes:
             # Montar la carpeta local de la aplicación en modo solo lectura
             # Sustituye /ruta/local/tu_app por la ruta real
-            - /home/luis/git/cloudflare-ddns-C/:/valgrinduser/app
+            - ${BINARY_FOLDER}:/valgrinduser/app
         tty: true
         restart: none

@@ -20,22 +20,22 @@ if [ -n "$REQUIRED_PACKAGES" ]; then
            /usr/share/info/*
 fi
 
-# Construir el comando Valgrind
-VALGRIND_CMD=/usr/bin/valgrind
+# Definir comando base
+CMD_VALGRIND="/usr/bin/valgrind"
+TARGET_PATH="/valgrinduser/app/$BINARY_NAME"
 
-# Añadir args de Valgrind si existen
+# Construir lista de argumentos para Valgrind
 if [ -n "$VALGRIND_ARGS" ]; then
-    # Desglozar VALGRIND_ARGS en múltiples argumentos
+    # VALGRIND_ARGS se expande como palabra única, pero dash dividirá en campos
     set -- $VALGRIND_ARGS
-    VALGRIND_CMD+=("$@")
+    ARGS_VALGRIND="$CMD_VALGRIND $* $TARGET_PATH"
+else
+    ARGS_VALGRIND="$CMD_VALGRIND $TARGET_PATH"
 fi
-
-# Ruta al binario a ejecutar
-VALGRIND_CMD+=("/valgrinduser/app/$BINARY_NAME")
 
 # Ejecutar como root o valgrinduser
 if [ "$ROOT_ACCESS" = "true" ]; then
-    exec "${VALGRIND_CMD[@]}"
+    exec sh -c "$ARGS_VALGRIND"
 else
-    exec su -s /bin/sh valgrinduser -c "${VALGRIND_CMD[*]}"
+    exec su -s /bin/sh valgrinduser -c "$ARGS_VALGRIND"
 fi
