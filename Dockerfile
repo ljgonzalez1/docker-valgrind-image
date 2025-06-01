@@ -57,11 +57,10 @@ RUN groupadd -g ${GID} ${USERNAME} && \
     mkdir -p /${USERNAME} && \
     chown ${USERNAME}:${USERNAME} /${USERNAME}
 
-# Cambiar al usuario creado
-USER ${USERNAME}:${USERNAME}
-
-# Establecer directorio de trabajo
 WORKDIR /${USERNAME}/app
+
+ENTRYPOINT exec "/usr/local/bin/entrypoint.sh"
+
 
 # Entrada por defecto
 CMD ["valgrind", "--help"]
